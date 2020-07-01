@@ -1,0 +1,24 @@
+class Solution {
+    public int repeatedNTimes(int[] A) {
+        Arrays.sort(A);
+        int s=A.length;
+        int c=s/2;
+        int cnt=0;
+        int x=0;
+        int init=A[x];
+        while(c!=cnt)
+        {
+            for(int i=0;i<s;i++)
+                if(init==A[i])
+                    cnt++;
+            if(c==cnt)
+                break;
+            cnt=0;
+            if(x<(s-1))
+                init=A[x++];
+            else
+                break;
+        }
+        return init;
+    }
+}
