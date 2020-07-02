@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+import java.util.List;
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        //count the frequency for each element
+    HashMap<Integer, Integer> map = new HashMap<>();
+    for (int num : nums) {
+        map.put(num, map.getOrDefault(num, 0) + 1);
+    }
+ 
+    // create a min heap
+    PriorityQueue<Map.Entry<Integer, Integer>> queue 
+                  = new PriorityQueue<>(Comparator.comparing(e -> e.getValue()));
+ 
+    //maintain a heap of size k.
+    for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+        queue.offer(entry);
+        if (queue.size() > k) {
+            queue.poll();
+        }
+    }
+ 
+    //get all elements from the heap
+    List<Integer> result = new ArrayList<>();
+    while (queue.size() > 0) {
+        result.add(queue.poll().getKey());
+    }
+ 
+    //reverse the order
+    Collections.reverse(result);
+ 
+    int r[]=new int[result.size()];
+    for(int y=0;y<result.size();y++)
+    {
+        r[y]=result.get(y);
+    }
+    return r;
+    }
+}
