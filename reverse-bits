@@ -1,0 +1,29 @@
+public class Solution {
+    // you need treat n as an unsigned value
+	public static String toBinaryString(int n) {
+		return String.format("%32s", Integer.toBinaryString(n)).replaceAll(" ", "0");
+	}
+
+	public static double log(int x, int base) {
+		return (Math.log(x) / Math.log(base));
+	}
+    public int reverseBits(int n) {
+        // store reversed bits of n. Initially all bits are set to 0
+		int reverse = 0;
+
+		// do till all set bits are processed
+		while (n != 0)
+		{
+			// find position of the rightmost set bit
+			double pos = log(n & -n, 2) + 1;
+
+			// set corresponding bit in result (set leftmost bit at position pos)
+			reverse = reverse | (1 << (Integer.SIZE - (int)pos));
+
+			// unset the rightmost set bit of a number
+			n = n & (n - 1);
+		}
+
+		return reverse;
+    }
+}
